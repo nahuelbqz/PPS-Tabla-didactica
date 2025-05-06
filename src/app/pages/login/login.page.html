@@ -1,0 +1,61 @@
+<ion-content>
+  <div class="container">
+    <span class="titulo">
+      <h1 style="display: inline; font-weight: bolder; font-size: 40px;">INICIO DE SESIÓN</h1>
+    </span>
+
+    <div>
+      <img style="width: 130px;" src="../../../assets/logo.png" alt="" />
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <!-- EMAIL -->
+      <ion-item class="ion-margin-top">
+        <ion-input type="email" placeholder="ejemplo@correo.com" formControlName="email" label="Correo"
+          autocomplete="email"></ion-input>
+      </ion-item>
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div *ngIf="form.controls.email.errors?.['required']">
+          El correo es requerido
+        </div>
+        <div *ngIf="form.controls.email.errors?.['email']">
+          Ingrese un correo válido
+        </div>
+      </div>
+
+      <br>
+      <!-- PASSWORD -->
+      <ion-item>
+        <ion-input [type]="hidePassword ? 'password' : 'text'" formControlName="password" label="Contraseña"
+          autocomplete="current-password" placeholder="**************"></ion-input>
+
+        <ion-button (click)="hidePassword = !hidePassword" slot="end" fill="clear" shape="round">
+          <ion-icon [name]="hidePassword ? 'eye-outline' : 'eye-off-outline'" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div *ngIf="form.controls.password.errors?.['required']">
+          La contraseña es requerida
+        </div>
+      </div>
+
+      <!-- LOGIN -->
+      <ion-button class="ion-margin-top" mode="ios" type="submit" [disabled]="form.invalid"> <!-- expand="block" -->
+        Ingresar
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+
+    </form>
+
+    <div class="bottom-buttons">
+      <ion-button class="circle-button" (click)="autocompletarUsuario('A')">ADMINISTRADOR</ion-button>
+      <ion-button class="circle-button" (click)="autocompletarUsuario('B')">INVITADO</ion-button>
+      <ion-button class="circle-button" (click)="autocompletarUsuario('C')">USUARIO</ion-button>
+      <!-- <ion-button class="circle-button" (click)="autocompletarUsuario('D')">ANÓNIMO</ion-button>
+      <ion-button class="circle-button" (click)="autocompletarUsuario('E')">TESTER</ion-button> -->
+    </div>
+
+  </div>
+</ion-content>
